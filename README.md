@@ -4,6 +4,10 @@ Implements particle systems using openGL
 
 TODO: Add a representative image for your project here
 
+## Results
+
+Implemented billboard and confetti requirements.
+
 ## How to build
 
 *Windows*
@@ -45,6 +49,4 @@ particles/build $ ../bin/confetti
 particles/build $ ../bin/demo
 ```
 
-## Results
 
-TODO: Show your work
