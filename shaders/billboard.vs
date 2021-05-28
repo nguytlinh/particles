@@ -15,5 +15,22 @@ void main()
 {
    color = uColor;
    uv = vPos.xy;
-   gl_Position = vec4(vPos, 1.0); 
+   vec3 newPos = vPos - vec3(0.5f, 0.5f, 0.0f);
+   mat4 scale = mat4 (uSize, 0.0f, 0.0f, 0.0f,
+					0.0f, uSize, 0.0f, 0.0f,
+					0.0f, 0.0f, uSize, 0.0f,
+					0.0f, 0.0f, 0.0f, 1.0f);
+
+   mat4 trans = mat4 (1.0f, 0.0f, 0.0f, 0.0f, 
+				     0.0f, 1.0f, 0.0f, 0.0f,
+				     0.0f, 0.0f, 1.0f, 0.0f, 
+				     uOffset, 1.0f);
+
+   vec3 cenz = normalize(uCameraPos - uOffset);
+   vec3 cenx = cross(vec3(0,1,0), normalize(cenz));
+   vec3 ceny = cross(normalize(cenz), normalize(cenx));
+
+   mat4 rotate = mat4 (vec4(cenx, 0), vec4(ceny, 0), vec4(cenz, 0), vec4(0,0,0,1));
+   mat4 transformation = trans * scale * rotate;
+   gl_Position = uVP * transformation * vec4(newPos, 1.0);
 }
